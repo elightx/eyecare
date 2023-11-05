@@ -29,7 +29,7 @@ import { Lens, Product } from '@/lib/types'
 import tokenAtom from '@/store/token'
 import { useAtom } from 'jotai'
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import wretch from 'wretch'
 
 export default function ProductPage() {
@@ -217,6 +217,6 @@ export default function ProductPage() {
       </div>
     </>
   ) : (
-    navigate('/shop')
+    <Navigate to="/shop" replace />
   )
 }
