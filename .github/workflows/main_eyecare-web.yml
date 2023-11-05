@@ -101,7 +101,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'noblecausecode-react'
+          app-name: 'eyecare-web'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3097577D0D884DC7A9C8A81FBE9001B7 }}
           package: release.zip
