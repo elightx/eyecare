@@ -76,7 +76,7 @@ jobs:
         uses: TheDoctor0/zip-release@0.6.1
         with:
           filename: release.zip
-          path: ./frontend2/build/*
+          path: ./frontend2/dist/*
       
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
