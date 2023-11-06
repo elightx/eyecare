@@ -76,11 +76,77 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-
+	        <dependency>
+		    <groupId>com.github.eirslett</groupId>
+	            <artifactId>frontend-maven-plugin</artifactId>
+	            <version>1.14.2</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-antrun-plugin</artifactId>
+	            <version>3.1.0</version>
+	        </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.14.2</version>
+				<configuration>
+				    <workingDirectory>frontend2</workingDirectory>
+				    <installDirectory>target</installDirectory>
+				</configuration>
+				<executions>
+				    <execution>
+					<id>install node and npm</id>
+					<goals>
+					    <goal>install-node-and-npm</goal>
+					</goals>
+					<configuration>
+					    <nodeVersion>v21.1.0</nodeVersion>
+					    <npmVersion>10.2.0</npmVersion>
+					</configuration>
+				    </execution>
+				    <execution>
+					<id>npm install</id>
+					<goals>
+					    <goal>npm</goal>
+					</goals>
+					<configuration>
+					    <arguments>install</arguments>
+					</configuration>
+				    </execution>
+				    <execution>
+					<id>npm run build</id>
+					<goals>
+					    <goal>npm</goal>
+					</goals>
+					<configuration>
+					    <arguments>run build</arguments>
+					</configuration>
+				    </execution>
+				</executions>
+			</plugin>
+			<plugin>
+			<artifactId>maven-antrun-plugin</artifactId>
+			<executions>
+			    <execution>
+				<phase>generate-resources</phase>
+				<configuration>
+				    <target>
+				    <copy todir="${project.build.directory}/classes/public">
+					<fileset dir="${project.basedir}/frontend2/dist"/>
+				    </copy>
+				    </target>
+				</configuration>
+				<goals>
+				    <goal>run</goal>
+				</goals>
+			    </execution>
+			</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
