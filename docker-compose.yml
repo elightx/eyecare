@@ -1,0 +1,21 @@
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: test_db
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/1.sql
+
+  fontend:
+    depends_on:
+      - backend
+    build: ./frontend
+    ports:
+      - 3000:3000
+    
+  backend:
+    depends_on:
+      - db
+    build: ./backend
